@@ -9,12 +9,14 @@
 	}
 	
 	$radio_addr=$_REQUEST["radioaddr"];
-	$airTemp=$_REQUEST["airTemp"];
+	$air_Temp=$_REQUEST["airTemp"];
+	$body_Temp=$_REQUEST["bodyTemp"];
+	$force_Read = $_REQUEST["forceRead"];
 	$password_id=$_REQUEST["pw"];
 	
 	if($password_id=='friend'){
 		
-		$query_string ="insert into sp14_jyu_datalog (id,radioaddr,airTemp,bodyTemp) values ('','$radio_addr','$airTemp','$bodyTemp')";
+		$query_string ="insert into sp14_jyu_datalog (id,radioaddr,airTemp,bodyTemp,forceVal,dateandtime) values ('','$radio_addr','$air_Temp','$body_Temp','$force_Read',NOW())";
 		if (mysqli_query($db,$query_string)){
 			echo "Data inserted to Database table successfully";
 		}

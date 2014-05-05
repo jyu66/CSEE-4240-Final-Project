@@ -20,7 +20,7 @@
 	<!--<button id="sub"> Submit </button>-->
 </form>
 
-<h3>Click to view the log of who has come and gone</h3>
+<h3>Click to view soldier status</h3>
 <a href="viewdata.php">View Log</a>
 
 <h3>Click to clear the log</h3>

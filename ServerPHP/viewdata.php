@@ -16,7 +16,10 @@
 	<tr>
 	<th> Radio Address</th>
 	<th> Name</th>
-	<th> Sensor Value</th>
+	<th> Date and Time</th>
+	<th> Air Temperature</th>
+	<th> Body Temperature</th>
+	<th> Force Applied to Body</th>
 	</tr>";
 	
 	while ($row = $res->fetch_assoc()){
@@ -24,7 +27,10 @@
 		echo "<tr>";
 		echo "<td>" . $row['radioaddr'] . "</td>";
 		echo "<td>" . $row['name'] . "</td>";
-		echo "<td>" . $row['sensorval'] . "</td>";
+		echo "<td>" . $row['dateandtime'] . "</td>";
+		echo "<td>" . $row['airTemp'] . "</td>";
+		echo "<td>" . $row['bodyTemp'] . "</td>";
+		echo "<td>" . $row['forceVal'] . "</td>";
 		echo "</tr>";
 
 	}

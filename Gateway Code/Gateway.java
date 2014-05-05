@@ -34,15 +34,19 @@ public class Gateway {
 						int [] data = rx.getData();
 						//System.out.println(data[0]+","+data[1]);
 						//int reading = data[0] | (data[1] <<8);
-						
 						int reading0 = data[0];
 						int reading1 = data[1];
+						int reading2 = data[2];
 						System.out.println("Air Temp: " +reading0);
 						System.out.println("Body Temp: " +reading1);
+						System.out.println("Force: " +reading2);
 						
 						String httpreq = Request
 									.Get("http://sensornetworks.engr.uga.edu/sp14/jyu/sensornet/data_upload.php?"
-									+"pw=friend"+"&"+"airTemp="+reading0+"&"+"bodyTemp="+reading1+"&"+"radioaddr=" + URLEncoder.encode(rx.getRemoteAddress64().toString(),"UTF-8")).execute().returnContent().asString();
+									+"pw=friend"+"&"+"airTemp="+reading0+
+									"&"+"bodyTemp="+reading1+
+									"&"+"forceRead="+reading2+
+									"&"+"radioaddr=" + URLEncoder.encode(rx.getRemoteAddress64().toString(),"UTF-8")).execute().returnContent().asString();
 						
 						
 						System.out.println(httpreq);
