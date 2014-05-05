@@ -30,7 +30,7 @@ void sendData(){
   buffer[2] = forceReading;
 
   XBeeAddress64 addr64 = XBeeAddress64(0,0);
-  ZBTxRequest zbTx = ZBTxRequest(addr64, buffer, 6);
+  ZBTxRequest zbTx = ZBTxRequest(addr64, buffer, 8);
   xbee.send(zbTx);
 }
 
@@ -38,8 +38,8 @@ void sendData(){
 void getTemp(){
   //air is pin 0
   //body is pin 1
-    int tempAir = analogRead(air_Pin);
-    int tempBod = analogRead(body_Pin);
+    float tempAir = analogRead(air_Pin);
+    float tempBod = analogRead(body_Pin);
     
     float airVolt = tempAir*(5.0f/1023.0f);
     float bodVolt = tempBod*(5.0f/1023.0f);
@@ -51,6 +51,7 @@ void getTemp(){
 //gets force currently being applied to body.
 void getForce(){
     forceReading = analogRead(force_Pin);
+    Serial.println(forceReading);
 }
 
 
