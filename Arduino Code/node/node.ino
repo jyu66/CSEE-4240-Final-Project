@@ -10,24 +10,29 @@ uint8_t buffer[72];
 float bodyTemp;
 float airTemp;
 int forceReading;
+int pirVal;
 
 
 int air_Pin=0;
 int body_Pin=1;
 int force_Pin=2;
+int pirPin = 4;
 
 void setup(){
   Serial.begin(9600);
   ss.begin(9600);
   xbee.setSerial(ss);
+  pinMode(pirPin,INPUT);
+  
 }
 
 void sendData(){
-  //int reading = analogRead(A0);
+  //int reading = analogRead(A0); 
 
   buffer[0] = airTemp;
   buffer[1] = bodyTemp;
   buffer[2] = forceReading;
+  buffer[3] = pirVal;
 
   XBeeAddress64 addr64 = XBeeAddress64(0,0);
   ZBTxRequest zbTx = ZBTxRequest(addr64, buffer, 8);
@@ -51,13 +56,22 @@ void getTemp(){
 //gets force currently being applied to body.
 void getForce(){
     forceReading = analogRead(force_Pin);
-    Serial.println(forceReading);
+   //erial.println(forceReading);
+}
+
+void hasMotion(){
+    pirVal = digitalRead(pirPin);
+    if (pirVal ==LOW){
+      Serial.println(pirVal);
+      Serial.println("MOTION DETECTED"); 
+    }
 }
 
 
 void loop(){
   getTemp();
   getForce();
+  hasMotion();
   sendData();
-  delay (10000);  
+  delay (5000);
 }

@@ -9,7 +9,7 @@
 	}
 	
 	
-	$query_string = "select *from sp14_jyu_whitelist join sp14_jyu_datalog on sp14_jyu_whitelist.radioaddr = sp14_jyu_datalog.radioaddr";
+	$query_string = "select *from sp14_jyu_whitelist join sp14_jyu_datalog on sp14_jyu_whitelist.radioaddr = sp14_jyu_datalog.radioaddr ORDER BY dateandtime DESC";
 	$res = $db->query($query_string);
 	
 	echo "<table border = '1'>
