@@ -2,7 +2,7 @@
 <body>
 <h1> ADD radio addresses here!!!</h1>
 <form id="myform" action="submit.php" method="post">
-	RFID card address:<input type="text" name = "addr"> <br>
+	radio address:<input type="text" name = "addr"> <br>
 	user:<input type="text" name = "name">
 	
 	<input type="submit" value="Submit">
@@ -12,7 +12,7 @@
 
 <h1> Remove radio addresses here!!!</h1>
 <form id="myform" action="remove.php" method="post">
-	RFID card address:<input type="text" name = "addr"> <br>
+	radio address:<input type="text" name = "addr"> <br>
 	user:<input type="text" name = "name">
 	
 	

@@ -50,7 +50,7 @@ public class Gateway {
 						reading2 = data[2];
 						reading3 = data[3];
 						radio = rx.getRemoteAddress64().toString();
-						System.out.println(radio);
+
 						
 						System.out.println("Air Temp: " +reading0);
 						System.out.println("Body Temp: " +reading1);
@@ -83,9 +83,8 @@ public class Gateway {
 				JsonParser parser = new JsonParser();
 				JsonElement f = parser.parse(httpreq);
 				JsonObject j = f.getAsJsonObject();
-				System.out.println(j.get("radioaddr"));
 				JsonArray motes = j.get("data").getAsJsonArray();
-				System.out.println(motes);
+
 				
 				for(int i=0; i<motes.size(); i++){
 					JsonObject obj = motes.get(i).getAsJsonObject();
@@ -96,10 +95,9 @@ public class Gateway {
 					//check by matching radio addresses to see if nearby people are friendly or not.
 					if(radio_address.equals(radio)){
 						
-						
+						System.out.println(name+" Is Friendly!"+" radio addr: " +radio_address);
 						//parse radio address to something readable by XBeeAddress64s
 						String val = radio_address.replace(",","");
-						System.out.println("PARSE: "+val);
 						val = val.replace("0x","");
 						String s1 = val.substring(0,2);
 						String s2 = val.substring(2,4);

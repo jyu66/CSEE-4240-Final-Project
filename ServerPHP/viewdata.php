@@ -20,6 +20,9 @@
 	<th> Air Temperature</th>
 	<th> Body Temperature</th>
 	<th> Force Applied to Body</th>
+	<th> Motion Detection</th>
+	<th> Under Fire?</th>
+	<th> Soldier Status</th>
 	</tr>";
 	
 	while ($row = $res->fetch_assoc()){
@@ -31,6 +34,9 @@
 		echo "<td>" . $row['airTemp'] . "</td>";
 		echo "<td>" . $row['bodyTemp'] . "</td>";
 		echo "<td>" . $row['forceVal'] . "</td>";
+		echo "<td>" . $row['hasmotion'] . "</td>";
+		echo "<td>" . $row['takingfire'] . "</td>";
+		echo "<td>" . $row['deadalive'] . "</td>";
 		echo "</tr>";
 
 	}
