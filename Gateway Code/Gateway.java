@@ -45,10 +45,10 @@ public class Gateway {
 						int [] data = rx.getData();
 						//System.out.println(data[0]+","+data[1]);
 						//int reading = data[0] | (data[1] <<8);
-						reading0 = data[0];
-						reading1 = data[1];
-						reading2 = data[2];
-						reading3 = data[3];
+						reading0 = data[0]; //air temp
+						reading1 = data[1]; //body temp
+						reading2 = data[2]; //force sensor
+						reading3 = data[3]; //motion sensor
 						radio = rx.getRemoteAddress64().toString();
 
 						
@@ -57,6 +57,7 @@ public class Gateway {
 						System.out.println("Force: " +reading2);
 						System.out.println("Motion: "+reading3);
 						
+						//http request that will be send to data_upload.php
 						String httpreq = Request
 									.Get("http://sensornetworks.engr.uga.edu/sp14/jyu/sensornet/data_upload.php?"
 									+"pw=friend"+"&"+"airTemp="+reading0+
@@ -75,17 +76,19 @@ public class Gateway {
 
 				}// end catch
 				
+				//requesting data from database
 				String httpreq = Request
 						.Get("http://sensornetworks.engr.uga.edu/sp14/jyu/sensornet/getdat.php?"
 						+"pw=friend").execute().returnContent().asString();
 				System.out.println(httpreq);
 				
+				//parsing json encoded data that came from getdat.php
 				JsonParser parser = new JsonParser();
 				JsonElement f = parser.parse(httpreq);
 				JsonObject j = f.getAsJsonObject();
 				JsonArray motes = j.get("data").getAsJsonArray();
 
-				
+				//getting radio address and name associated with address
 				for(int i=0; i<motes.size(); i++){
 					JsonObject obj = motes.get(i).getAsJsonObject();
 					String radio_address = obj.get("radioaddr").getAsString();

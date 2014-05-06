@@ -56,11 +56,14 @@ void getTemp(){
 //gets force currently being applied to body.
 void getForce(){
     forceReading = analogRead(force_Pin);
-   //erial.println(forceReading);
+   
 }
 
+//detecting motion
 void hasMotion(){
     pirVal = digitalRead(pirPin);
+    
+    //pin is initially high, when motion is detected resistor is "pulled up" making pin value low
     if (pirVal ==LOW){
       Serial.println(pirVal);
       Serial.println("MOTION DETECTED"); 
