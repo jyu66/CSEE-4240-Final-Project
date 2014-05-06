@@ -12,7 +12,9 @@ import com.google.gson.JsonParser;
 import com.rapplogic.xbee.api.ApiId;
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeAddress64;
+import com.rapplogic.xbee.api.XBeePacket;
 import com.rapplogic.xbee.api.XBeeResponse;
+import com.rapplogic.xbee.api.wpan.TxRequest64;
 import com.rapplogic.xbee.api.zigbee.ZNetRxResponse;
 import com.rapplogic.xbee.api.zigbee.ZNetTxRequest;
 
@@ -26,6 +28,7 @@ public class Gateway {
 	int reading3;
 	
 	String radio;
+	int[] payload = new int [72];
 	public Gateway() throws Exception {
 		try {
 			xbee.open("COM5", 9600);
@@ -97,7 +100,7 @@ public class Gateway {
 					
 					//check by matching radio addresses to see if nearby people are friendly or not.
 					if(radio_address.equals(radio)){
-						
+						System.out.println(radio_address.equals(radio));
 						System.out.println(name+" Is Friendly!"+" radio addr: " +radio_address);
 						//parse radio address to something readable by XBeeAddress64s
 						String val = radio_address.replace(",","");
@@ -111,16 +114,22 @@ public class Gateway {
 						String s7 = val.substring(12,14);
 						String s8 = val.substring(14,16);
 						val = s1 + " "+ s2+ " " + s3+ " " + s4+ " " +
-								s5+ " " +s6+ " " +s7+ " " +s8+ " ";
+								s5+ " " +s6+ " " +s7+ " " +s8;
 						System.out.println("PARSE2: "+val);
 							
 						XBeeAddress64 addr = new XBeeAddress64(val);
 						System.out.println(addr);
 						
-						//int[] payload = null;
-						//payload[0]=1;
-						//ZNetTxRequest tx= new ZNetTxRequest(addr,payload[0]);
+							//sending data that tells mote user is friendly.
+							
+							payload[0]=1 & 0xFF;
+							payload[1]=(1 >>8) &0xFF;
+							//TxRequest64 tx = new TxRequest64 (addr, payload);
+							ZNetTxRequest tx = new ZNetTxRequest(addr,payload);
+							xbee.sendAsynchronous(tx);
+							Thread.sleep(2000);
 						
+							
 					}
 					else{
 						System.out.println(name+" Is Not Friendly!"+" radio addr: " +radio_address);
