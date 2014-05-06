@@ -20,8 +20,8 @@ import com.rapplogic.xbee.api.zigbee.ZNetTxRequest;
 public class Gateway {
 
 	XBee xbee = new XBee();
-	float reading0;
-	float reading1;
+	int reading0;
+	int reading1;
 	int reading2;
 	int reading3;
 	
@@ -117,8 +117,9 @@ public class Gateway {
 						XBeeAddress64 addr = new XBeeAddress64(val);
 						System.out.println(addr);
 						
-						
-						//ZNetTxRequest tx= new ZNetTxRequest(addr,);
+						//int[] payload = null;
+						//payload[0]=1;
+						//ZNetTxRequest tx= new ZNetTxRequest(addr,payload[0]);
 						
 					}
 					else{

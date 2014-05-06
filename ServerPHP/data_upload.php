@@ -24,7 +24,7 @@
 	
 
 //determine whether or not soldier has been killed	
-	if ($body_Temp==$airTemp+1){
+	if ($body_Temp==$air_Temp){
 		$deadalive = "dead";
 	}
 	else{

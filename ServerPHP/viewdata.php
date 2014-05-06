@@ -1,5 +1,9 @@
 <html>
+<head>
+<META HTTP-EQUIV="refresh" CONTENT="3">
+</head>
 <body>
+
 <?php
 
 	//get and check connection
